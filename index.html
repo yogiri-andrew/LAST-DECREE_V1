@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#050505">
+  <title>LAST DECREE // V3</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="bootScreen" class="boot-screen">
+    <div class="boot-core">
+      <div class="boot-logo">LAST<span> DECREE</span></div>
+      <div class="boot-bar"><i id="bootBar"></i></div>
+      <p id="bootText">INITIALISATION DU NOYAU...</p>
+    </div>
+  </div>
+
+  <div class="noise"></div>
+  <div class="scanlines"></div>
+  <canvas id="particles"></canvas>
+
+  <header class="topbar">
+    <button class="brand" data-page="dashboard">
+      <span class="brand-mark">LD</span>
+      <span>
+        <b>LAST DECREE</b>
+        <small>CLASSIFIED NETWORK // V3</small>
+      </span>
+    </button>
+    <div class="top-status">
+      <span class="live-dot"></span> SYSTEM ONLINE
+      <span id="clock">--:--:--</span>
+    </div>
+  </header>
+
+  <div class="layout">
+    <aside class="sidebar">
+      <div class="access-card">
+        <span class="label">AUTHORIZATION</span>
+        <strong id="accessLevel">AGENT</strong>
+        <span class="access-line"></span>
+        <small>ID: LD-ONLINE</small>
+      </div>
+
+      <nav>
+        <button class="nav-btn active" data-page="dashboard"><span>⌂</span> Centre</button>
+        <button class="nav-btn" data-page="decrees"><span>▣</span> Décrets</button>
+        <button class="nav-btn" data-page="archives"><span>▤</span> Archives</button>
+        <button class="nav-btn" data-page="hierarchy"><span>♜</span> Hiérarchie</button>
+        <button class="nav-btn" data-page="terminal"><span>›_</span> Terminal</button>
+        <button class="nav-btn" data-page="recruitment"><span>✦</span> Recrutement</button>
+      </nav>
+
+      <button id="emergencyBtn" class="emergency">⚠ SIGNALER UNE ANOMALIE</button>
+    </aside>
+
+    <main class="content">
+      <section id="dashboard" class="page active">
+        <div class="hero">
+          <div>
+            <span class="eyebrow">TRANSMISSION // 08.08.2026</span>
+            <h1>Bienvenue dans le<br><span>LAST DECREE.</span></h1>
+            <p>Un réseau clandestin numérique. Chaque information a son niveau. Chaque décision laisse une trace.</p>
+            <div class="hero-actions">
+              <button class="primary" data-page="decrees">CONSULTER LES DÉCRETS <b>→</b></button>
+              <button class="ghost" data-page="terminal">OUVRIR LE TERMINAL</button>
+            </div>
+          </div>
+          <div class="core-ring">
+            <div class="ring r1"></div><div class="ring r2"></div><div class="ring r3"></div>
+            <div class="core">LD</div>
+          </div>
+        </div>
+
+        <div class="grid stats">
+          <article class="panel stat"><span>AGENTS ACTIFS</span><strong data-count="127">0</strong><small>+12 cette semaine</small></article>
+          <article class="panel stat"><span>DÉCRETS PUBLIÉS</span><strong data-count="43">0</strong><small>3 en attente</small></article>
+          <article class="panel stat"><span>ARCHIVES</span><strong data-count="892">0</strong><small>Base synchronisée</small></article>
+          <article class="panel stat"><span>MENACE SYSTÈME</span><strong class="safe">LOW</strong><small>Dernier scan : <span id="scanTime">--</span></small></article>
+        </div>
+
+        <div class="grid two">
+          <article class="panel">
+            <div class="panel-head"><h2>▰ ACTIVITÉ RÉCENTE</h2><button class="tiny" data-page="archives">VOIR TOUT</button></div>
+            <div id="activityFeed" class="feed"></div>
+          </article>
+          <article class="panel">
+            <div class="panel-head"><h2>◈ DÉCRET DU JOUR</h2><span class="badge">CLASSIFIED</span></div>
+            <div class="decree-feature">
+              <span class="decree-number">DECREE // 043</span>
+              <h3>Le silence n'est pas l'absence d'information.</h3>
+              <p>« Observez avant d'agir. Comprenez avant de juger. »</p>
+              <button class="text-btn" data-page="decrees">OUVRIR LE DOSSIER →</button>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section id="decrees" class="page">
+        <div class="page-title"><span>DATABASE // DECREES</span><h1>Décrets</h1><p>Directives officielles du LAST DECREE.</p></div>
+        <div class="toolbar"><input id="decreeSearch" placeholder="Rechercher un décret..."><select id="decreeFilter"><option value="all">Tous les niveaux</option><option>PUBLIC</option><option>AGENT</option><option>CLASSIFIED</option><option>OMEGA</option></select></div>
+        <div id="decreeList" class="cards"></div>
+      </section>
+
+      <section id="archives" class="page">
+        <div class="page-title"><span>SECURE STORAGE // ARCHIVES</span><h1>Archives</h1><p>Fragments récupérés et dossiers historiques.</p></div>
+        <div class="toolbar"><input id="archiveSearch" placeholder="Rechercher dans les archives..."><select id="archiveFilter"><option value="all">Toutes les catégories</option><option>HISTORIQUE</option><option>OPÉRATION</option><option>ANOMALIE</option><option>PERSONNEL</option></select></div>
+        <div id="archiveList" class="cards"></div>
+      </section>
+
+      <section id="hierarchy" class="page">
+        <div class="page-title"><span>CHAIN OF COMMAND</span><h1>Hiérarchie</h1><p>Sélectionnez un rang pour consulter ses informations.</p></div>
+        <div id="rankList" class="rank-list"></div>
+      </section>
+
+      <section id="terminal" class="page">
+        <div class="page-title"><span>ROOT TERMINAL // INTERACTIVE</span><h1>Terminal</h1><p>Tapez <b>help</b> pour afficher les commandes.</p></div>
+        <div class="terminal-window">
+          <div class="terminal-head"><span>● ● ●</span><span>LD-TERMINAL</span><span>SECURE</span></div>
+          <div id="terminalOutput" class="terminal-output"></div>
+          <form id="terminalForm" class="terminal-form"><span>agent@last-decree:~$</span><input id="terminalInput" autocomplete="off" autofocus></form>
+        </div>
+      </section>
+
+      <section id="recruitment" class="page">
+        <div class="page-title"><span>PERSONNEL // INTAKE</span><h1>Recrutement</h1><p>Le réseau recherche des profils capables de garder le secret.</p></div>
+        <form id="recruitForm" class="panel recruit-form">
+          <label>Nom de code<input name="codename" required placeholder="Ex: VOID-07"></label>
+          <label>Spécialité<select name="specialty"><option>Archiviste</option><option>Analyste</option><option>Veilleur</option><option>Exécuteur</option><option>Technicien</option></select></label>
+          <label>Pourquoi rejoindre le réseau ?<textarea name="reason" required rows="5"></textarea></label>
+          <button class="primary" type="submit">TRANSMETTRE LA CANDIDATURE →</button>
+          <p id="recruitMessage" class="form-message"></p>
+        </form>
+      </section>
+    </main>
+  </div>
+
+  <div id="modal" class="modal">
+    <div class="modal-box">
+      <button id="modalClose" class="modal-close">×</button>
+      <span id="modalKicker"></span><h2 id="modalTitle"></h2><div id="modalBody"></div>
+    </div>
+  </div>
+
+  <div id="toast" class="toast"></div>
+  <script src="script.js"></script>
+</body>
+</html>
